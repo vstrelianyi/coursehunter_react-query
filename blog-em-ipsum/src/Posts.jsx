@@ -18,7 +18,13 @@ export function Posts() {
 
 	const queryClient = useQueryClient();
 
-  const { data, isError, error, isLoading, isFetching } = useQuery(
+  const {
+		data,
+		isError,
+		error,
+		isLoading,
+		// isFetching
+	} = useQuery(
 		["posts", currentPage],
 		()=>fetchPosts( currentPage ),
 		{
@@ -81,7 +87,7 @@ export function Posts() {
 
       </div>
       <hr />
-      {selectedPost && <PostDetail post={selectedPost} />}
+      { selectedPost && <PostDetail post={selectedPost} />}
     </>
   );
 }

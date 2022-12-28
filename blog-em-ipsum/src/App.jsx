@@ -11,11 +11,11 @@ function App() {
     // provide React Query client to App
 
 		<QueryClientProvider client={ queryClient}>
-    <div className="App">
-      <h1>Blog Posts</h1>
-      <Posts />
-    </div>
-		<ReactQueryDevtools/>
+			<div className="App">
+				<h1>Blog Posts</h1>
+				<Posts />
+			</div>
+			<ReactQueryDevtools/>
 		</QueryClientProvider>
   );
 }

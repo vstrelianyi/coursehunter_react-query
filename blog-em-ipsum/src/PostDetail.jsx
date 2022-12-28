@@ -25,12 +25,14 @@ async function updatePost(postId) {
 
 export function PostDetail( { post } ) {
 
-	const deleteMutation = useMutation((postId)=> deletePost( postId ))
+	const deleteMutation = useMutation( (postId)=> deletePost( postId ) )
+	const updateMutation = useMutation( (postId)=> updatePost( postId ) )
 
   return (
     <>
       <h3 style={{ color: "blue" }}>{post.title}</h3>
-      <button onClick={()=> deleteMutation.mutation(post.id)}>Delete</button>
+      <button onClick={()=> deleteMutation.mutate(post.id)}>Delete</button>
+			<button onClick={()=> updateMutation.mutate(post.id)}>Update</button>
 
 			{ deleteMutation.isError && <p style={ { color: "red" } }>Error deleting the post</p> }
 
@@ -42,7 +44,18 @@ export function PostDetail( { post } ) {
 				<p style={ { color: "green" } }>Post { post.id } has (not) been deleted</p>
 			) }
 
-			<button>Update title</button>
+			{ updateMutation.isError && <p style={ { color: "red" } }>Error deleting the post</p> }
+
+			{ updateMutation.isLoading && (
+				<p style={ { color: "purple" } }>Updating the post</p>
+			) }
+
+			{ updateMutation.isSuccess && (
+				<p style={ { color: "green" } }>Post { post.id } has (not) been updated</p>
+			) }
+
+			<button onClick={ () => updateMutation.mutate(post.id) }>Update title</button>
+
       <p>{post.body}</p>
       <h4>Comments</h4>
 			<Comments postId={ post.id }/>
